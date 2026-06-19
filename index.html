@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Text Updates &middot; NOLIMIT CUSTOMS</title>
+<meta name="description" content="Sign up for text updates from NOLIMIT CUSTOMS — appointment reminders, estimates, invoices, and service updates." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --asphalt:#14171a;
+    --panel:#1e2329;
+    --panel-2:#252b32;
+    --line:#333b44;
+    --ink:#f2f3f5;
+    --muted:#9aa3ad;
+    --muted-2:#6f7882;
+    --ember:#f26b21;
+    --ember-soft:#ff8a4c;
+    --steel:#c7ced6;
+    --ok:#3ec97a;
+    --err:#ff6b6b;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    background:var(--asphalt);
+    color:var(--ink);
+    line-height:1.55;
+    min-height:100vh;
+    /* tread motif: faint diagonal bars on the asphalt */
+    background-image:
+      linear-gradient(135deg, rgba(255,255,255,.015) 0 14px, transparent 14px 28px),
+      radial-gradient(1100px 500px at 70% -10%, rgba(242,107,33,.10), transparent 60%);
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:clamp(20px,4vw,48px);}
+
+  /* ---------- masthead ---------- */
+  .mast{display:flex;align-items:center;gap:14px;padding-bottom:28px;}
+  .mark{
+    font-family:'Anton',sans-serif;
+    font-size:clamp(26px,4vw,34px);
+    letter-spacing:.5px;line-height:.9;text-transform:uppercase;
+  }
+  .mark .lo{color:var(--ink);}
+  .mark .cu{color:var(--ember);}
+  .mark .sub{
+    display:block;font-family:'Inter',sans-serif;font-weight:600;
+    font-size:11px;letter-spacing:.42em;color:var(--muted);
+    text-transform:uppercase;margin-top:4px;
+  }
+  .tread-rule{flex:1;height:8px;border-radius:4px;
+    background:repeating-linear-gradient(90deg,var(--line) 0 9px,transparent 9px 16px);
+    opacity:.6;}
+
+  /* ---------- hero + grid ---------- */
+  .grid{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(24px,4vw,52px);align-items:start;}
+  @media(max-width:860px){.grid{grid-template-columns:1fr;}}
+
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:var(--ember);margin-bottom:14px;}
+  h1{
+    font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;
+    font-size:clamp(40px,7vw,76px);line-height:.92;letter-spacing:.5px;margin-bottom:18px;
+  }
+  h1 em{font-style:normal;color:var(--ember);}
+  .lede{font-size:clamp(16px,2vw,18px);color:var(--muted);max-width:46ch;margin-bottom:26px;}
+
+  .what{border-left:3px solid var(--ember);padding:2px 0 2px 16px;margin-bottom:24px;}
+  .what li{list-style:none;color:var(--steel);font-size:15px;padding:5px 0;display:flex;gap:10px;align-items:flex-start;}
+  .what li::before{content:"";flex:0 0 7px;height:7px;margin-top:8px;border-radius:50%;background:var(--ember);}
+
+  .trust{font-size:13px;color:var(--muted-2);}
+
+  /* ---------- form card ---------- */
+  .card{
+    background:linear-gradient(180deg,var(--panel),var(--panel-2));
+    border:1px solid var(--line);border-radius:var(--radius);
+    padding:clamp(22px,3vw,32px);
+    box-shadow:0 24px 60px rgba(0,0,0,.45);
+  }
+  .card h2{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;
+    font-size:24px;letter-spacing:.5px;margin-bottom:4px;}
+  .card .note{font-size:13px;color:var(--muted);margin-bottom:22px;}
+
+  .field{margin-bottom:16px;}
+  label.lbl{display:block;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:7px;}
+  .req{color:var(--ember);}
+  input[type="text"],input[type="tel"]{
+    width:100%;background:var(--asphalt);border:1px solid var(--line);
+    border-radius:10px;padding:13px 14px;color:var(--ink);font-size:16px;font-family:inherit;
+    transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  input::placeholder{color:var(--muted-2);}
+  input:focus{outline:none;border-color:var(--ember);box-shadow:0 0 0 3px rgba(242,107,33,.22);}
+  input[aria-invalid="true"]{border-color:var(--err);box-shadow:0 0 0 3px rgba(255,107,107,.18);}
+  .err-msg{display:none;color:var(--err);font-size:12.5px;margin-top:6px;}
+  input[aria-invalid="true"] ~ .err-msg{display:block;}
+
+  /* consent — the compliance core, kept high-contrast & quiet */
+  .consent{
+    display:flex;gap:12px;align-items:flex-start;
+    background:var(--asphalt);border:1px solid var(--line);border-radius:10px;
+    padding:14px;margin:18px 0 6px;
+  }
+  .consent input[type="checkbox"]{
+    flex:0 0 22px;width:22px;height:22px;margin-top:2px;accent-color:var(--ember);cursor:pointer;
+  }
+  .consent label{font-size:13px;color:var(--steel);line-height:1.55;cursor:pointer;}
+  .consent a{color:var(--ember-soft);text-decoration:underline;text-underline-offset:2px;}
+  .consent a:hover{color:var(--ember);}
+  .consent-err{display:none;color:var(--err);font-size:12.5px;margin:8px 2px 0;}
+  .consent-err.show{display:block;}
+
+  button.cta{
+    width:100%;margin-top:18px;border:0;cursor:pointer;
+    background:var(--ember);color:#1a0f08;font-weight:700;font-size:16px;
+    letter-spacing:.02em;padding:15px;border-radius:10px;font-family:inherit;
+    transition:transform .12s ease, background .15s ease, box-shadow .15s ease;
+    box-shadow:0 8px 22px rgba(242,107,33,.30);
+  }
+  button.cta:hover{background:var(--ember-soft);transform:translateY(-1px);}
+  button.cta:active{transform:translateY(0);}
+  button.cta:focus-visible{outline:3px solid #fff;outline-offset:2px;}
+
+  .fineprint{font-size:12px;color:var(--muted-2);margin-top:16px;line-height:1.6;}
+  .fineprint strong{color:var(--muted);font-weight:600;}
+
+  /* success state */
+  .success{display:none;text-align:center;padding:18px 6px;}
+  .success.show{display:block;}
+  .success .tick{width:56px;height:56px;border-radius:50%;background:rgba(62,201,122,.14);
+    border:1px solid rgba(62,201,122,.5);display:grid;place-items:center;margin:0 auto 16px;color:var(--ok);font-size:28px;}
+  .success h2{color:var(--ink);margin-bottom:8px;}
+  .success p{color:var(--muted);font-size:14px;max-width:34ch;margin:0 auto;}
+  form.hide{display:none;}
+
+  /* footer */
+  footer{margin-top:46px;padding-top:22px;border-top:1px solid var(--line);
+    display:flex;flex-wrap:wrap;gap:6px 22px;justify-content:space-between;
+    font-size:12.5px;color:var(--muted-2);}
+  footer a{color:var(--muted);text-decoration:none;}
+  footer a:hover{color:var(--ember-soft);}
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important;animation:none !important;}
+    button.cta:hover{transform:none;}
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="mast">
+      <div class="mark">
+        <span class="lo">NOLIMIT</span> <span class="cu">CUSTOMS</span>
+        <span class="sub">Wheels &middot; Tires &middot; Custom</span>
+      </div>
+      <div class="tread-rule" aria-hidden="true"></div>
+    </header>
+
+    <div class="grid">
+      <!-- left: the pitch -->
+      <section>
+        <p class="eyebrow">Text Updates</p>
+        <h1>Stay in the <em>loop</em> on your build.</h1>
+        <p class="lede">Get the important stuff by text instead of phone tag — when your wheels land, when your estimate is ready, and when the shop's done.</p>
+        <ul class="what" aria-label="What we'll text you about">
+          <li>Appointment reminders &amp; service updates</li>
+          <li>Estimates, quotes &amp; invoice notifications</li>
+          <li>Payment confirmations &amp; secure payment links</li>
+          <li>Job-complete &amp; pickup-ready alerts</li>
+          <li>Occasional promotions &amp; special deals</li>
+        </ul>
+        <p class="trust">Trusted in North Myrtle Beach for 20 years. We never sell or share your number.</p>
+      </section>
+
+      <!-- right: the form (compliance core) -->
+      <section class="card">
+        <form id="optin" novalidate>
+          <h2>Sign up for texts</h2>
+          <p class="note">Takes 15 seconds. Reply STOP anytime to cancel.</p>
+
+          <div class="field">
+            <label class="lbl" for="name">Full name <span class="req">*</span></label>
+            <input type="text" id="name" name="name" autocomplete="name" placeholder="Adam Salliby" />
+            <span class="err-msg" id="name-err">Please enter your name.</span>
+          </div>
+
+          <div class="field">
+            <label class="lbl" for="phone">Mobile number <span class="req">*</span></label>
+            <input type="tel" id="phone" name="phone" inputmode="numeric" autocomplete="tel" placeholder="(843) 555-0142" maxlength="14" />
+            <span class="err-msg" id="phone-err">Enter a valid 10-digit U.S. mobile number.</span>
+          </div>
+
+          <div class="consent">
+            <input type="checkbox" id="consent" name="consent" />
+            <label for="consent">
+              By checking this box, I agree to receive recurring automated marketing and informational text messages
+              (e.g., appointment reminders, estimates, invoices, service updates, and promotions) from
+              <strong>NOLIMIT CUSTOMS</strong> at the mobile number provided. Consent is not a condition of any purchase.
+              Message frequency varies. Message &amp; data rates may apply. Reply STOP to opt out or HELP for help.
+              See our <a href="https://nolimitcustoms.com/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>
+              and <a href="https://nolimitcustoms.com/sms-terms" target="_blank" rel="noopener">SMS Terms &amp; Conditions</a>.
+            </label>
+          </div>
+          <p class="consent-err" id="consent-err">Please check the box to give consent before continuing.</p>
+
+          <button type="submit" class="cta">Sign me up for texts</button>
+
+          <p class="fineprint">
+            <strong>NOLIMIT CUSTOMS</strong> &middot; Message &amp; data rates may apply &middot; Message frequency varies
+            &middot; Reply <strong>STOP</strong> to cancel, <strong>HELP</strong> for help. Carriers are not liable for
+            delayed or undelivered messages.
+          </p>
+        </form>
+
+        <div class="success" id="success" aria-live="polite">
+          <div class="tick" aria-hidden="true">&#10003;</div>
+          <h2>You're signed up</h2>
+          <p>Thanks — you'll start getting text updates from NOLIMIT CUSTOMS. Reply STOP anytime to opt out.</p>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <span>NOLIMIT CUSTOMS &middot; 1604 Highway 17 S, North Myrtle Beach, SC 29582</span>
+      <span><a href="tel:+18432727003">(843) 272-7003</a> &middot; <a href="mailto:adam@nolimitcustoms.com">adam@nolimitcustoms.com</a></span>
+    </footer>
+  </div>
+
+<script>
+  // NOTE: This is a front-end consent capture example for the opt-in screenshot
+  // Telnyx requires. Wire the submit handler to your Speedpoint/Telnyx endpoint to
+  // record the opt-in (timestamp, number, consent text shown) for your records.
+  (function(){
+    var form = document.getElementById('optin');
+    var name = document.getElementById('name');
+    var phone = document.getElementById('phone');
+    var consent = document.getElementById('consent');
+    var consentErr = document.getElementById('consent-err');
+
+    // light (xxx) xxx-xxxx formatting as the user types
+    phone.addEventListener('input', function(){
+      var d = phone.value.replace(/\D/g,'').slice(0,10);
+      var out = d;
+      if (d.length > 6)      out = '('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6);
+      else if (d.length > 3) out = '('+d.slice(0,3)+') '+d.slice(3);
+      else if (d.length > 0) out = '('+d;
+      phone.value = out;
+      if (phone.getAttribute('aria-invalid')==='true' && d.length===10) clear(phone);
+    });
+
+    function flag(el){ el.setAttribute('aria-invalid','true'); }
+    function clear(el){ el.removeAttribute('aria-invalid'); }
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var ok = true;
+      if (!name.value.trim()){ flag(name); ok = false; } else clear(name);
+      var digits = phone.value.replace(/\D/g,'');
+      if (digits.length !== 10){ flag(phone); ok = false; } else clear(phone);
+      if (!consent.checked){ consentErr.classList.add('show'); ok = false; } else consentErr.classList.remove('show');
+      if (!ok) return;
+
+      // success state (replace with real submission to your backend)
+      form.classList.add('hide');
+      document.getElementById('success').classList.add('show');
+    });
+
+    consent.addEventListener('change', function(){
+      if (consent.checked) consentErr.classList.remove('show');
+    });
+  })();
+</script>
+</body>
+</html>
