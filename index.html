@@ -197,6 +197,7 @@
           <div class="consent">
             <input type="checkbox" id="consent" name="consent" />
             <label for="consent">
+              <span style="display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ember);border:1px solid var(--line);border-radius:5px;padding:1px 7px;margin-right:6px;">Optional</span>
               By checking this box, I agree to receive recurring automated informational text messages
               (e.g., appointment reminders, estimates, invoices, payment links, and service updates) from
               <strong>NOLIMIT CUSTOMS</strong> at the mobile number provided. Consent is not a condition of any purchase.
@@ -205,21 +206,21 @@
               and <a href="sms-terms.html" target="_blank" rel="noopener">SMS Terms &amp; Conditions</a>.
             </label>
           </div>
-          <p class="consent-err" id="consent-err">Please check the box to give consent before continuing.</p>
+          <p style="font-size:12px;color:var(--muted-2);margin:8px 2px 0;">Checking this box is optional &mdash; you can submit the form without it, and we simply won&rsquo;t text you.</p>
 
           <button type="submit" class="cta">Sign me up for texts</button>
 
           <p class="fineprint">
             <strong>NOLIMIT CUSTOMS</strong> &middot; Message &amp; data rates may apply &middot; Message frequency varies
-            &middot; Reply <strong>STOP</strong> to cancel, <strong>HELP</strong> for help. Carriers are not liable for
+            &middot; Reply <strong>STOP</strong> to cancel, <strong>HELP</strong> for help. We will not share your mobile opt-in data with third parties or affiliates for marketing or promotional purposes. Carriers are not liable for
             delayed or undelivered messages.
           </p>
         </form>
 
         <div class="success" id="success" aria-live="polite">
           <div class="tick" aria-hidden="true">&#10003;</div>
-          <h2>You're signed up</h2>
-          <p>Thanks — you'll start getting text updates from NOLIMIT CUSTOMS. Reply STOP anytime to opt out.</p>
+          <h2 id="success-head">You're signed up</h2>
+          <p id="success-msg">Thanks — you'll start getting text updates from NOLIMIT CUSTOMS. Reply STOP anytime to opt out.</p>
         </div>
       </section>
     </div>
@@ -239,7 +240,6 @@
     var name = document.getElementById('name');
     var phone = document.getElementById('phone');
     var consent = document.getElementById('consent');
-    var consentErr = document.getElementById('consent-err');
 
     // light (xxx) xxx-xxxx formatting as the user types
     phone.addEventListener('input', function(){
@@ -261,16 +261,21 @@
       if (!name.value.trim()){ flag(name); ok = false; } else clear(name);
       var digits = phone.value.replace(/\D/g,'');
       if (digits.length !== 10){ flag(phone); ok = false; } else clear(phone);
-      if (!consent.checked){ consentErr.classList.add('show'); ok = false; } else consentErr.classList.remove('show');
       if (!ok) return;
 
-      // success state (replace with real submission to your backend)
+      // The SMS consent checkbox is OPTIONAL (carrier requirement: it cannot be a
+      // mandatory field when the phone field is required). Checking it is the SMS
+      // opt-in; submitting without it records no SMS consent and no texts are sent.
+      var optedIn = consent.checked;
+
+      // success state (replace with real submission to your backend; record the
+      // opt-in status, timestamp, mobile number, and the exact consent text shown)
+      document.getElementById('success-head').textContent = optedIn ? "You're signed up" : "Got it";
+      document.getElementById('success-msg').textContent = optedIn
+        ? "Thanks — you'll start getting text updates from NOLIMIT CUSTOMS. Reply STOP anytime to opt out."
+        : "Thanks, we've got your info. You did not opt in to text messages, so we won't text you.";
       form.classList.add('hide');
       document.getElementById('success').classList.add('show');
-    });
-
-    consent.addEventListener('change', function(){
-      if (consent.checked) consentErr.classList.remove('show');
     });
   })();
 </script>
